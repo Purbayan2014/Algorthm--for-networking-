@@ -3,12 +3,12 @@ from pckt_struct import pck
 
 class nd_struct:
    
-       def __init__(self, idx, lambval):
+       def __init__(self, idx, lamb):
             self.idx = idx
-            self.lambval = lambval
+            self.lambval = lamb
             self.packet = None
             self.status = "Ready for transmission"
-            self.bck_offfline = 0
+            self.bck_offline = 0
             self.trans_init_time = 0
             self.pck_cnt = 1 
 
@@ -35,7 +35,7 @@ class nd_struct:
             if high_val > 8:
                 high_val = 8 
             self.bck_offline = nw.curr_time + (np.random.randint(0, high=high_val) * nw.slt_time)
-            print("Node ", self.id, "Packet idx ", self.packet.id,  "Packet collision count = ", self.packet.coll_cnt, \
+            print("Node ", self.idx, "Packet idx ", self.packet.idx,  "Packet collision count = ", self.packet.coll_cnt, \
                     "backoff = ", self.bck_offline)
 
 
