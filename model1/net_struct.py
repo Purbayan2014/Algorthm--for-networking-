@@ -60,8 +60,8 @@ class nt_struct:
         """
         if nd1.status == "Transmission in progress"  and nd2.status == "Transmission in progress":
             self.collision_cnt += 1
-        nd1.stp_trans("collision detected")
-        nd2.stp_trans("collision detected")
+            nd1.stp_trans("collision detected")
+            nd2.stp_trans("collision detected")
 
     def disp_stat(self):
         print("\n Total packets that have been transmitted from A : ", nd1.pck_cnt)
