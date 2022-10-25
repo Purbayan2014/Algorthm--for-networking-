@@ -46,7 +46,7 @@ class nd_struct:
                 if self.trans_init_time + nw.tt + nw.tp  < nw.curr_time:
                     self.status == 'Ready for transmission'
                     self.trans_init_time = 0
-            elif self.status == 'Collision detected':
+            elif self.status == 'collision detected':
                 self.call_back_time(nw)
                 self.status = 'Waiting'
             elif self.status == 'Waiting' and self.bck_offline <= nw.curr_time:
