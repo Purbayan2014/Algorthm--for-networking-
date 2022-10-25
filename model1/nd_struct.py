@@ -1,7 +1,7 @@
 import numpy as np
-from pckt-struct import pck
+from pckt_struct import pck
 
-class nd-struct:
+class nd_struct:
    
        def __init__(self, idx, lambval):
             self.idx = idx
@@ -23,13 +23,13 @@ class nd-struct:
             self.status = "Transmission in progress"
             self.trans_init_time = curr_time 
 
-        def stp_trans(self, reason="Ready for transmission"):
+       def stp_trans(self, reason="Ready for transmission"):
             self.status = reason
 
-        def check_avail(self):
-            return np.random.poission(self.lamval) == 1
+       def check_avail(self):
+            return np.random.poisson(self.lambval) == 1
 
-        def call_back_time(self, nw):
+       def call_back_time(self, nw):
             self.packet.incr_coll()
             high_val = (2**self.packet.coll_cnt) - 1
             if high_val > 8:
@@ -39,14 +39,14 @@ class nd-struct:
                     "backoff = ", self.bck_offline)
 
 
-        def operator(self, nw):
+       def operator(self, nw):
             if self.status == 'Ready for transmission' and self.check_avail():
                 self.trans_st(nw.curr_time)
             elif self.status == 'Transmission in progress':
                 if self.trans_init_time + nw.tt + nw.tp  < nw.curr_time:
-                    self.status == 'Ready'
+                    self.status == 'Ready for transmission'
                     self.trans_init_time = 0
-            elif self.status == 'Collision':
+            elif self.status == 'Collision detected':
                 self.call_back_time(nw)
                 self.status = 'Waiting'
             elif self.status == 'Waiting' and self.bck_offline <= nw.curr_time:

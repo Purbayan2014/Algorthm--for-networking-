@@ -11,7 +11,7 @@ class nt_struct:
         """
         self.tp = 10 
         self.slt_time = slt_time
-        self.cur_time = 0
+        self.curr_time = 0
         self.tt = 15
         self.mx_time = mx_time
         self.collision_cnt = 0
@@ -24,8 +24,8 @@ class nt_struct:
           nd2 (node object) : Node2
         """
         self.pack_trans(nd1, nd2)
-        self.cur_time += 1
-        if self.cur_time  == self.mx_time: 
+        self.curr_time += 1
+        if self.curr_time  == self.mx_time: 
             self.disp_stat()
 
     def pack_trans(self, nd1, nd2):
@@ -37,11 +37,11 @@ class nt_struct:
           nd1 (node object) : Node1
           nd2 (node object) : Node2
         """
-        nd1.opt(self)
-        nd2.opt(self)
+        nd1.operator(self)
+        nd2.operator(self)
         self.coll_detect(nd1, nd2)
 
-        print(self.cur_time)
+        print(self.curr_time)
         print("\n Status of the first Node : ", nd1.status)
         print("\n Status of the second Node : ", nd2.status)
         print("--------------------------------------------")
@@ -59,8 +59,8 @@ class nt_struct:
         """
         if nd1.status == "Transmission in progress"  and nd2.status == "Transmission in progress":
             self.collision_cnt += 1
-        nd1.stp_trans("coll")
-        nd2.stp_trans("coll")
+        nd1.stp_trans("collision detected")
+        nd2.stp_trans("collision detected")
 
     def disp_stat(self):
         print("\n Total packets that have been transmitted from A : ", nd1.pck_cnt)
@@ -68,4 +68,4 @@ class nt_struct:
         print("\n Total number of collisions that have been detected between nodes : ", self.collision_cnt)
         print("\n The average throughput generated from end A to end B :")
         print("\n The average throughput generated from end B to end A :")
-        print("\n Simulated time period for this collision : ", self.cur_time)
+        print("\n Simulated time period for this collision : ", self.curr_time)
